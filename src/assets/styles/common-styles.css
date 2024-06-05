@@ -1,0 +1,112 @@
+/* Google Fonts (Inter) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+/* Color Variables */
+:root {
+    --light: #EDF2F4;
+    --dark: #2B2D42;
+    --primary1: #ba4949;
+    --primary2: #EDF2F4;
+    --secondary1: #38858a;
+    --secondary2: #397097;
+}
+
+/* Base Styles for All Screens */
+body {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    line-height: normal;
+    font-weight: 500;
+}
+
+
+/* Responsive Typography */
+
+/* Mobile Styles (Default) */
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+    margin: 0px;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+h3 {
+    font-size: 22px;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+p {
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 400;
+}
+
+/* Tablet styles */
+@media (min-width: 769px) and (max-width: 1024px) {
+    h1 {
+        font-size: 48px;
+    }
+
+    h2 {
+        font-size: 36px;
+    }
+
+    h3 {
+        font-size: 28px;
+    }
+
+    h4 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 400;
+    }
+}
+
+/* Desktop Styles */
+@media (min-width: 1025px) {
+
+    h1 {
+        font-size: 56px;
+    }
+
+    h2 {
+        font-size: 42px;
+    }
+
+    h3 {
+        font-size: 30px;
+    }
+
+    h4 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 20px;
+        line-height: 30px;
+        font-weight: 400;
+    }
+}

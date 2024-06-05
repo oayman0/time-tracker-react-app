@@ -1,0 +1,24 @@
+.not-found{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+height: 400px;
+padding: 30px;
+gap: 30px;
+    font: 16px;
+background-color: var(--primary1,#495E57);
+color: var(--light,#fff);
+}
+.not-found button{
+    width: 187px;
+    height: 64px;
+    font-size: 16px;
+    color: var(--dark, #333);
+    background-color: var(--primary2, #F4CE14);
+    border: none;
+    border-radius: 16px;
+    font-weight: 600;
+    align-self: center;
+}

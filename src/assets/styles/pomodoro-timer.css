@@ -1,0 +1,83 @@
+/* src/components/PomodoroTimer.css */
+
+.pomodoro-timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.5s;
+  }
+  
+  .pomodoro  {
+    background-color:  var(--primary1,#495E57); /* Tomato color for Pomodoro */
+  }
+  
+  .shortBreak {
+    background-color: var(--secondary1,#495E57); /* Sky blue color for Short Break */
+  }
+  
+  .longBreak {
+    background-color: var(--secondary2,#495E57); /* Steel blue color for Long Break */
+  }
+  
+  .buttons-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    border-radius: 5px;
+    color: white;
+  }
+
+  .active-btn{
+    background-color:  #55555593 /* Tomato color for Pomodoro */
+  }
+  
+  .timer-display {
+    /* font-size: 10em; */
+    margin-bottom: 20px;
+    color: white;
+    font-size: 120px;
+    font-weight: bold;
+    /* font-family: ; */
+    /* margin-top: 20px; */
+  }
+  
+  .control-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 30px;
+  }
+  
+  .control-buttons button {
+    background-color: white;
+    color: var(--dark,#495E57);
+
+    margin-left: 70px;
+    padding: 0px 12px;
+    box-shadow: rgb(235, 235, 235) 0px 6px 0px;
+    font-size: 22px;
+    height: 55px;
+    font-weight: bold;
+    width: 200px;
+    transition: color 0.5s ease-in-out 0s;
+  }
+
+  .hidden{
+    visibility: hidden;
+  }
+  .endBtn{
+    width: 40px;
+    font-size: 3em;
+    color: white;
+  }
