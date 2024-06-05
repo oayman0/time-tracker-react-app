@@ -8,6 +8,7 @@
     height: 100vh;
     font-family: Arial, sans-serif;
     transition: background-color 0.5s;
+    padding: 0px 30px;
   }
   
   .pomodoro  {
@@ -29,7 +30,7 @@
   }
   
   button {
-    padding: 10px 20px;
+    padding: 10px 10px;
     font-size: 1em;
     cursor: pointer;
     border: none;
