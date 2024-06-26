@@ -1,5 +1,4 @@
-// src/components/PomodoroTimer.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faForwardStep } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,6 +7,8 @@ const PomodoroTimer = () => {
   const [time, setTime] = useState(1500); // 25 minutes in seconds
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
+  const cycleEndAudioRef = useRef(null); // Reference to the cycle end audio element
+  const startPauseAudioRef = useRef(null); // Reference to the start/pause audio element
 
   useEffect(() => {
     let interval = null;
@@ -16,7 +17,7 @@ const PomodoroTimer = () => {
       interval = setInterval(() => {
         setTime((time) => (time > 0 ? time - 1 : 0));
       }, 1000);
-    } else if (!isActive && time !== 0 && isPaused) {
+    } else {
       clearInterval(interval);
     }
 
@@ -24,7 +25,7 @@ const PomodoroTimer = () => {
       handleCycleEnd();
     }
 
-    return () => clearInterval(interval);
+    return () => clearInterval(interval); // Ensure interval is cleared on cleanup
   }, [isActive, isPaused, time]);
 
   const handleModeChange = (newMode) => {
@@ -43,11 +44,16 @@ const PomodoroTimer = () => {
   const handleStartPause = () => {
     setIsActive(true);
     setIsPaused(!isPaused);
+
+    if (startPauseAudioRef.current) {
+      startPauseAudioRef.current.play();
+    }
   };
 
   const handleCycleEnd = () => {
-    setIsActive(false);
-    setIsPaused(true);
+    if (cycleEndAudioRef.current) {
+      cycleEndAudioRef.current.play();
+    }
 
     if (mode === 'pomodoro') {
       handleModeChange('shortBreak');
@@ -57,7 +63,9 @@ const PomodoroTimer = () => {
   };
 
   const handleReset = () => {
-    handleCycleEnd();
+    setIsActive(false);
+    setIsPaused(true);
+    handleModeChange(mode);
   };
 
   const formatTime = (seconds) => {
@@ -69,9 +77,9 @@ const PomodoroTimer = () => {
   return (
     <div className={`pomodoro-timer ${mode}`}>
       <div className="buttons-row">
-        <button className={mode=='pomodoro'?`active-btn`:``} onClick={() =>{ if (mode!='pomodoro') handleModeChange('pomodoro')}} >Pomodoro</button>
-        <button className={mode=='shortBreak'?`active-btn`:``} onClick={() =>{ if (mode!='shortBreak') handleModeChange('shortBreak')}}>Short Break</button>
-        <button className={mode=='longBreak'?`active-btn`:``} onClick={() =>{if (mode!='longBreak')  handleModeChange('longBreak')}}>Long Break</button>
+        <button className={mode === 'pomodoro' ? 'active-btn' : ''} onClick={() => { if (mode !== 'pomodoro') handleModeChange('pomodoro'); }}>Pomodoro</button>
+        <button className={mode === 'shortBreak' ? 'active-btn' : ''} onClick={() => { if (mode !== 'shortBreak') handleModeChange('shortBreak'); }}>Short Break</button>
+        <button className={mode === 'longBreak' ? 'active-btn' : ''} onClick={() => { if (mode !== 'longBreak') handleModeChange('longBreak'); }}>Long Break</button>
       </div>
       <div className="timer-display">
         {formatTime(time)}
@@ -80,12 +88,12 @@ const PomodoroTimer = () => {
         <button onClick={handleStartPause}>
           {isActive && !isPaused ? 'PAUSE' : 'START'}
         </button>
-        
-          <div className={!isActive?`endBtn hidden`:`endBtn`} onClick={handleReset}>
+        <div className={!isActive ? 'endBtn hidden' : 'endBtn'} onClick={handleReset}>
           <FontAwesomeIcon icon={faForwardStep} />
-          </div>
-       
+        </div>
       </div>
+      <audio ref={cycleEndAudioRef} src="path-to-cycle-end-sound.mp3" preload="auto" />
+      <audio ref={startPauseAudioRef} src="path-to-start-pause-sound.mp3" preload="auto" />
     </div>
   );
 };
