@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faForwardStep } from '@fortawesome/free-solid-svg-icons';
+import startPauseSound from '../assets/audio/click.mp3';
+import cycleEndSound from '../assets/audio/end.mp3';
+import buttonClickSound from '../assets/audio/switch.mp3';
+import { useMode, useSetMode } from '../contexts/ModeContext';
+
 
 const PomodoroTimer = () => {
   const [mode, setMode] = useState('pomodoro'); // Modes: 'pomodoro', 'shortBreak', 'longBreak'
@@ -9,6 +14,7 @@ const PomodoroTimer = () => {
   const [isPaused, setIsPaused] = useState(true);
   const cycleEndAudioRef = useRef(null); // Reference to the cycle end audio element
   const startPauseAudioRef = useRef(null); // Reference to the start/pause audio element
+  const buttonClickAudioRef = useRef(null); // Reference to the button click audio element
 
   useEffect(() => {
     let interval = null;
@@ -17,8 +23,6 @@ const PomodoroTimer = () => {
       interval = setInterval(() => {
         setTime((time) => (time > 0 ? time - 1 : 0));
       }, 1000);
-    } else {
-      clearInterval(interval);
     }
 
     if (time === 0) {
@@ -28,7 +32,10 @@ const PomodoroTimer = () => {
     return () => clearInterval(interval); // Ensure interval is cleared on cleanup
   }, [isActive, isPaused, time]);
 
-  const handleModeChange = (newMode) => {
+  const handleModeChange = (newMode, playSound = true) => {
+    if (playSound) {
+      playButtonClickSound();
+    }
     if (newMode === 'pomodoro') {
       setTime(1500); // 25 minutes
     } else if (newMode === 'shortBreak') {
@@ -51,21 +58,26 @@ const PomodoroTimer = () => {
   };
 
   const handleCycleEnd = () => {
+    console.log("Cycle ended"); // Debug log to check if function is triggered
     if (cycleEndAudioRef.current) {
-      cycleEndAudioRef.current.play();
+      cycleEndAudioRef.current.play().catch(error => console.error('Audio play error:', error));
     }
 
     if (mode === 'pomodoro') {
-      handleModeChange('shortBreak');
+      handleModeChange('shortBreak', false); // Avoid playing button click sound
     } else if (mode === 'shortBreak' || mode === 'longBreak') {
-      handleModeChange('pomodoro');
+      handleModeChange('pomodoro', false); // Avoid playing button click sound
     }
   };
 
   const handleReset = () => {
-    setIsActive(false);
-    setIsPaused(true);
-    handleModeChange(mode);
+    handleCycleEnd();
+  };
+
+  const playButtonClickSound = () => {
+    if (buttonClickAudioRef.current) {
+      buttonClickAudioRef.current.play().catch(error => console.error('Audio play error:', error));
+    }
   };
 
   const formatTime = (seconds) => {
@@ -92,8 +104,9 @@ const PomodoroTimer = () => {
           <FontAwesomeIcon icon={faForwardStep} />
         </div>
       </div>
-      <audio ref={cycleEndAudioRef} src="path-to-cycle-end-sound.mp3" preload="auto" />
-      <audio ref={startPauseAudioRef} src="path-to-start-pause-sound.mp3" preload="auto" />
+      <audio ref={cycleEndAudioRef} src={cycleEndSound} preload="auto" />
+      <audio ref={startPauseAudioRef} src={startPauseSound} preload="auto" />
+      <audio ref={buttonClickAudioRef} src={buttonClickSound} preload="auto" />
     </div>
   );
 };
