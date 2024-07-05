@@ -56,6 +56,7 @@
         flex-direction: row;
         justify-content: space-between;
         padding: 56px 100px;
+        min-height: 50vh;
     }
 
     .hero img {
@@ -71,10 +72,14 @@
 @media (min-width: 1025px) {
     .hero {
         padding: 56px 170px;
+        min-height: 50vh;
     }
 
     .hero img {
         width: 384px;
+    }
+    .hero-info {
+        max-width: 480px;
     }
 }
 

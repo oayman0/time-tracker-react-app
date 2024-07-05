@@ -6,7 +6,7 @@ function Footer() {
       <footer>
         <div className="footer">
           {/* <img src={logo} alt='Little Lemon Logo' /> */}
-          <div className='footer-lists'>
+          {/* <div className='footer-lists'>
             <ul>
               <li><Link to="/">Home</Link></li>
               <li><Link to="/">About</Link></li>
@@ -28,7 +28,7 @@ function Footer() {
             <li><a href="https://www.threads.com/" target="_blank" rel="noopener noreferrer">Threads</a></li>
             <li><a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">Tiktok</a></li>
           </ul>
-          </div>
+          </div> */}
         </div>
       </footer>
     );

@@ -6,15 +6,46 @@ import cycleEndSound from '../assets/audio/end.mp3';
 import buttonClickSound from '../assets/audio/switch.mp3';
 import { useMode, useSetMode } from '../contexts/ModeContext';
 
-
-const PomodoroTimer = () => {
-  const [mode, setMode] = useState('pomodoro'); // Modes: 'pomodoro', 'shortBreak', 'longBreak'
+const PomodoroTimer = ({mode, setMode}) => {
+  // const [mode, setMode] = useState('pomodoro');
+   // Modes: 'pomodoro', 'shortBreak', 'longBreak'
   const [time, setTime] = useState(1500); // 25 minutes in seconds
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(true);
   const cycleEndAudioRef = useRef(null); // Reference to the cycle end audio element
   const startPauseAudioRef = useRef(null); // Reference to the start/pause audio element
   const buttonClickAudioRef = useRef(null); // Reference to the button click audio element
+
+  // Load state from localStorage on mount
+  useEffect(() => {
+    const savedMode = localStorage.getItem('mode');
+    const savedTime = localStorage.getItem('time');
+    const savedIsActive = localStorage.getItem('isActive');
+    const savedIsPaused = localStorage.getItem('isPaused');
+    const savedLastUpdate = localStorage.getItem('lastUpdate');
+
+    if (savedMode) setMode(savedMode);
+    if (savedTime) {
+      const remainingTime = parseInt(savedTime, 10);
+      if (savedLastUpdate && savedIsActive === 'true' && savedIsPaused === 'false') {
+        const elapsed = Math.floor((Date.now() - parseInt(savedLastUpdate, 10)) / 1000);
+        setTime(Math.max(remainingTime - elapsed, 0));
+      } else {
+        setTime(remainingTime);
+      }
+    }
+    if (savedIsActive) setIsActive(savedIsActive === 'true');
+    if (savedIsPaused) setIsPaused(savedIsPaused === 'true');
+  }, []);
+
+  // Save state to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('mode', mode);
+    localStorage.setItem('time', time);
+    localStorage.setItem('isActive', isActive);
+    localStorage.setItem('isPaused', isPaused);
+    localStorage.setItem('lastUpdate', Date.now());
+  }, [mode, time, isActive, isPaused]);
 
   useEffect(() => {
     let interval = null;

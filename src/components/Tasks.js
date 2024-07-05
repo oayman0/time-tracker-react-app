@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleCheck, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faCircleCheck, faEdit, faTrash,faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { faCircle }  from '@fortawesome/free-regular-svg-icons';
 
-const Tasks = () => {
+const Tasks = ({mode, setMode}) => {
   const [tasks, setTasks] = useState([]);
   const [taskName, setTaskName] = useState('');
   const [estPomodoros, setEstPomodoros] = useState(1);
   const [note, setNote] = useState('');
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [addingTask, setAddingTask] = useState(false);
+
+  // Load tasks from localStorage on mount
+  useEffect(() => {
+    const savedTasks = localStorage.getItem('tasks');
+    if (savedTasks) {
+      setTasks(JSON.parse(savedTasks));
+    }
+  }, []);
+
+  // Save tasks to localStorage whenever tasks change
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks]);
 
   const toggleAddingTask = () => {
     setAddingTask(!addingTask);
@@ -50,7 +63,7 @@ const Tasks = () => {
         note: note,
         done: false // Initially task is not done
       };
-  
+
       // Update tasks state with new task
       setTasks([...tasks, newTask]);
     }
@@ -90,8 +103,8 @@ const Tasks = () => {
   };
 
   return (
-    <div className="tasks-section">
-      <h2 className='tasks-title'>Tasks</h2>
+    <div className={`tasks-section ${mode}`} >
+      {/* <h2 className='tasks-title'>Tasks</h2> */}
 
       {/* Display tasks */}
       <div className="task-list">
@@ -105,7 +118,7 @@ const Tasks = () => {
                     <input type="text" value={taskName} onChange={(e) => setTaskName(e.target.value)} />
                   </label>
                   <label>
-                    Est Pomodoros
+                    # Pomodoros
                     <div>
                       <button type="button" onClick={() => handleEstPomodorosChange(-1)}>-</button>
                       <input className='pomo-number' type="number" value={estPomodoros} onChange={(e) => setEstPomodoros(parseInt(e.target.value))} />
@@ -128,12 +141,11 @@ const Tasks = () => {
                       {task.name}
                     </div>
                     {task.note && <div>{task.note}</div>}
-                    <div>Est Pomodoros: {task.estPomodoros}</div>
+                    <div># Pomodoros: {task.estPomodoros}</div>
                   </div>
                   <div className="task-actions">
                     <button className="mark-done-btn" onClick={() => markTaskDone(task.id)}>
-                    <FontAwesomeIcon icon={task.done ? faCircleCheck : faCircle} />
-                      {/* <FontAwesomeIcon icon={faCircleCheck} /> */}
+                      <FontAwesomeIcon icon={task.done ? faCircleCheck : faCircle} />
                     </button>
                     <button className="edit-task-btn" onClick={() => editTask(task)}>
                       <FontAwesomeIcon icon={faEdit} />
@@ -152,7 +164,9 @@ const Tasks = () => {
       </div>
 
       {!addingTask && editingTaskId === null && (
-        <button className="add-task-btn" onClick={toggleAddingTask}>Add Task</button>
+        <button className="add-task-btn" onClick={toggleAddingTask}>
+          <FontAwesomeIcon className="icon-btn"  icon={faCirclePlus} />
+          Add Task</button>
       )}
 
       {addingTask && editingTaskId === null && (
@@ -162,7 +176,7 @@ const Tasks = () => {
             <input type="text" value={taskName} onChange={(e) => setTaskName(e.target.value)} />
           </label>
           <label>
-            Est Pomodoros
+            # Pomodoros
             <div>
               <button type="button" onClick={() => handleEstPomodorosChange(1)}>+</button>
               <input className='pomo-number' type="number" value={estPomodoros} onChange={(e) => setEstPomodoros(parseInt(e.target.value))} />

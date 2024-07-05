@@ -5,9 +5,9 @@ const Hero = () => {
         <>
             <section className="hero">
                 <div className="hero-info">
-                    <h1>Time Tracker</h1>
+                    <h1>Pomify</h1>
                     <h2>Be focused.</h2>
-                    <p>Focus To-Do is an easy-to-use time and task management application that helps you to manage tasks anywhere and anytime, and helps you to perform tasks efficiently. Millions of users around the world use our application and have gained efficiency.</p>
+                    <p>Boost your productivity with Pomify, the perfect blend of a Pomodoro timer and task manager. Stay focused, manage tasks effortlessly, and track your progress, all in one intuitive app. Achieve more with Pomify!</p>
                     <Link to="/app">
                         <button aria-label="Get Started">Get Started</button>
                     </Link>

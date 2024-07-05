@@ -5,6 +5,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 50px;
+    min-height: 50vh;
 }
 .footer-lists{
     display: flex;
