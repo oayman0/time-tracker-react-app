@@ -4,7 +4,7 @@ const NotFound = () => {
         <>
             <div className="not-found">
                 <p>
-                    404 - Page Not Found - Time Tracker
+                    404 - Page Not Found - Pomify
                 </p>
                 <Link to="/">
   <button aria-label="Return to Home">Return to Home</button>
