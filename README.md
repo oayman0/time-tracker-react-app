@@ -1,8 +1,22 @@
-# Pomify  ![favicon64](https://github.com/oayman0/time-tracker-react-app/assets/37955772/9c6a7ea5-5584-4deb-b0c3-b6b9733edbeb)
+# ![logo](https://github.com/oayman0/time-tracker-react-app/assets/37955772/f43f0b5b-834a-45eb-bbea-11824cd5191c) Pomify, Stay Focused! 
 
 Pomify is a sleek and intuitive Pomodoro timer app designed to help you stay focused and manage your tasks efficiently. With Pomify, you can easily track your work sessions, take breaks, and stay on top of your productivity goals.
 
+## Live Demo:
+Check out the live demo of Pomify [here](https://debi-tracker.onrender.com/).
 
+## Technologies Used
+
+- **React**: A JavaScript library for building user interfaces.
+- **Context API**: For state management.
+- **Local Storage**: For persisting timer and task data.
+- **FontAwesome**: For icons.
+- **HTML5**: For the structure of the web app.
+- **CSS3**: For styling the web app.
+
+##Screenshots
+![Pomify, be focused! (1)](https://github.com/oayman0/time-tracker-react-app/assets/37955772/f35f618a-910c-482e-b6b3-2b9114bbc514)
+![Pomify, be focused! (3)](https://github.com/oayman0/time-tracker-react-app/assets/37955772/e9109a17-4672-44da-8081-fe36f0f1a18e)
 
 ## Features
 
