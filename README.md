@@ -14,9 +14,10 @@ Check out the live demo of Pomify [here](https://debi-tracker.onrender.com/).
 - **HTML5**: For the structure of the web app.
 - **CSS3**: For styling the web app.
 
+
 ##Screenshots
 ![Pomify, be focused! (1)](https://github.com/oayman0/time-tracker-react-app/assets/37955772/f35f618a-910c-482e-b6b3-2b9114bbc514)
-![Pomify, be focused! (3)](https://github.com/oayman0/time-tracker-react-app/assets/37955772/e9109a17-4672-44da-8081-fe36f0f1a18e)
+![Pomify, be focused! (3)](https://github.com/oayman0/time-tracker-react-app/assets/37955772/e9109a17-4672-44da-8081-fe36f0f1a18e) ![Pomify, be focused! (4)](https://github.com/oayman0/time-tracker-react-app/assets/37955772/43648b6e-5533-4124-85bf-a7a8a5e717b3)
 
 ## Features
 
