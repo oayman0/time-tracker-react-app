@@ -11,8 +11,7 @@ function App() {
 
     <Routes>
       <Route exact path='/' element={<LandingPage />}/>
-      {/* <Route exact path='/app' element={< AppPage />}/> */}
-      <Route path='/app' element={< AppPage />}/>
+      <Route exact path='/app' element={< AppPage />}/>
       <Route path='*' element={< NotFoundPage />} />
       {/* 404 NOT FOUND route - no 'path' */}
     </Routes>
