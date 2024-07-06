@@ -1,4 +1,4 @@
-# Pomify
+# Pomify  ![favicon64](https://github.com/oayman0/time-tracker-react-app/assets/37955772/9c6a7ea5-5584-4deb-b0c3-b6b9733edbeb)
 
 Pomify is a sleek and intuitive Pomodoro timer app designed to help you stay focused and manage your tasks efficiently. With Pomify, you can easily track your work sessions, take breaks, and stay on top of your productivity goals.
 
